@@ -39,7 +39,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text("Invalid OTP"),
+                    content: Text("Invalid , please try again."),
                     backgroundColor: Colors.red,
                   ),
                 );
