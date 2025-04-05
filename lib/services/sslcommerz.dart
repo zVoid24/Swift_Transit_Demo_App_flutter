@@ -34,11 +34,12 @@ class SSLCommerzService {
       if (result.status == "VALID") {
         // Payment successful, update user balance
         String? userId = FirebaseAuth.instance.currentUser?.uid;
-        if (userId != null) {
-          Database db = Database(uid: userId);
-          await db.updateBalance(amount);
-          await db.updateTransaction(Timestamp.now(), amount, "Recharge");
+        if (userId == null) {
+          throw Exception("User ID is null. Cannot proceed with payment.");
         }
+        Database db = Database(uid: userId);
+        await db.updateBalance(amount);
+        await db.updateTransaction(Timestamp.now(), amount, "Recharge");
         return true; // Payment success
       }
       return false; // Payment failed
